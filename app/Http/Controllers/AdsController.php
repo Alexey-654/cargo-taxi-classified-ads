@@ -76,7 +76,7 @@ class AdsController extends Controller
         $ad->fill($data);
         $ad->save();
         $request->session()->flash('message', 'Ваше объявление успешно созданно.');
-        
+
         return redirect()->route('ad.show', ['id' => $ad->id]);
     }
 
@@ -168,7 +168,7 @@ class AdsController extends Controller
                 'out_of_town_price' => 'required',
                 'photo' => 'image|between:10,1000'
             ]);
-            
+
             if ($request->file('photo')) {
                 $image = $request->file('photo');
                 $extension = $image->clientExtension();

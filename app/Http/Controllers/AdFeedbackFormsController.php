@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Mail;
 class AdFeedbackFormsController extends Controller
 {
     /**
-     * 
-     * 
+     *
+     *
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -63,7 +63,7 @@ class AdFeedbackFormsController extends Controller
      */
     public function show($id)
     {
-        // 
+        //
     }
 
     /**
