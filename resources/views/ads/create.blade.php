@@ -6,15 +6,6 @@
 @endsection
 
 @section('preamble')
-    @if ($errors->any())
-    <div class="alert alert-danger" role="alert">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
 
 <div class="bd-callout bd-callout-info">
   <h1>Подать объявление о грузоперевозках в Краснодаре</h1>

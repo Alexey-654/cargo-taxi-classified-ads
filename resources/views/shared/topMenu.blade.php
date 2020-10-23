@@ -12,6 +12,7 @@
             </div>
           </div>
         </nav>
+
         @if (session('message'))
         <div class="container">
         <div class="alert alert-success my-3" role="alert">
@@ -19,10 +20,23 @@
         </div>
         </div>
         @endif
+
         @if (session('error'))
         <div class="container">
         <div class="alert alert-danger my-3" role="alert">
         {{session('error')}}
         </div>
         </div>
+        @endif
+
+        @if ($errors->any())
+          <div class="container">
+              <div class="alert alert-danger my-3" role="alert">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          </div>
         @endif

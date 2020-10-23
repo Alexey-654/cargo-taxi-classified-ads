@@ -11,15 +11,7 @@
 </ul>
 </div>
 <div class="col-12 col-md-6 pt-2">
-  @if ($errors->any())
-      <div class="alert alert-danger" role="alert">
-          <ul>
-              @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
-              @endforeach
-          </ul>
-      </div>
-  @endif
+
 <h4>Заполните форму чтобы оставить отзыв</h4>
   {!! Form::open(['url' => '/feed/create']) !!}
   <div class="form-group">

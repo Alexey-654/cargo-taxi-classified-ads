@@ -45,7 +45,7 @@ class AdFeedbackFormsController extends Controller
             'name' => 'required|string|max:255',
             'ad_id' => 'bail|required|numeric|max:5',
             'score' => 'bail|required|in:1,2,3,4,5',
-            'message' => 'bail|required|string|min:45|max:600|unique:feedbacks'
+            'message' => 'bail|required|string|min:45|max:600|not_regex:{http}|unique:feedbacks'
         ]);
 
         $feedback = new Feedback();

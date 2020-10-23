@@ -11,7 +11,7 @@
   </div>
   <div class="form-group">
   {{Form::label('message', 'Текст объявления')}}
-  {{Form::textarea('message', '', ['class' => 'form-control input', 'rows' => 3, 'required', 'minlength' => 45, 'title' => "Соообщение должно содержать как минимум 45 символов"])}}
+  {{Form::textarea('message', '', ['class' => 'form-control input', 'rows' => 3, 'required', 'minlength' => 30, 'title' => "Соообщение должно содержать как минимум 45 символов"])}}
   </div>
   <div class="modal-footer">
   {{Form::submit('Отправить', ['class' => 'btn btn-primary'])}}

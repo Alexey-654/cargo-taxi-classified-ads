@@ -7,15 +7,6 @@
 @endsection
 
 @section('preamble')
-@if ($errors->any())
-    <div class="alert alert-danger" role="alert">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
 
 <h1>Поднять в выдаче, редактировать или удалить ваше объявление</h1>
 

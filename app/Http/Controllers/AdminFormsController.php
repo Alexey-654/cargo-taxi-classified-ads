@@ -17,14 +17,22 @@ class AdminFormsController extends Controller
     {
         $this->validate($request, [
             'email' => 'bail|required|email|string|max:255',
-            'message' => 'bail|required|string|min:45|max:500',
+            'message' => [
+                'bail',
+                'required',
+                'string',
+                'min:30',
+                'max:500',
+                'not_regex:{http}',
+                'not_regex:{/}'
+            ]
         ]);
 
         $message = request('email') . "\n" . request('message');
 
         Mail::raw($message, function ($message) {
             $message->to('vianosenko@gmail.com')
-                ->subject('Admin Feedback form from gruzovoe-taxi-krasnodar.ru');
+                ->subject('Admin Feedback Form gruzovoe-taxi-krasnodar.ru');
         });
 
         return back()->with('message', 'Сообщение отправленно');
