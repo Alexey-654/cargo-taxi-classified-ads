@@ -1,10 +1,10 @@
     <div class="row">
       <div class="col-12 col-md-3 pb-2 pb-md-0">
-      @if (url()->current() === route('ad.show', $ad->id))
+      @if (url()->current() === route('ads.show', $ad->id))
       <a href="/storage/{{$ad->photo}}">
       @endif
         <img class="img-fluid" src="/storage/thumbnails/{{$ad->photo}}" alt="Перевозчик - {{ $ad->firstname }}; номер объявления - {{ $ad->id }} | Грузовое такси">
-      @if (url()->current() === route('ad.show', $ad->id))
+      @if (url()->current() === route('ads.show', $ad->id))
       </a>
       @endif
         <div class="tag">
@@ -63,7 +63,7 @@
         <br>
         <div class="tagicon">
         <span class="small">Обновлено {{$ad->updated_at->diffForHumans()}}</span>
-          @if (url()->current() !== route('ad.show', $ad->id))
+          @if (url()->current() !== route('ads.show', $ad->id))
           <a href="/ads/{{$ad->id}}"><i class="fa fa-address-card fa-lg myhover" data-toggle="tooltip" data-placement="top" title="перейти в карточку перевозчика"></i></a>
           @endif
         </div>

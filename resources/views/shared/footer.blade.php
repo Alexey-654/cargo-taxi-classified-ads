@@ -4,19 +4,19 @@
 
   <div class="col-12 col-md-4 pt-3">
   <p class="lgfont">Связаться с администратором сайта:</p>
-  {!! Form::open(['url' => 'to-admin']) !!}
+  {{ Form::open(['url' => 'to-admin']) }}
   <div class="form-group">
-  {{Form::label('email', 'Ваш email')}}
-  {{Form::email('email', '', ['class' => 'form-control input', 'required', 'placeholder' => 'example@mail.ru'])}}
+  {{ Form::label('adminFormEmail', 'Ваш email') }}
+  {{ Form::email('adminFormEmail', '', ['class' => 'form-control input', 'required', 'placeholder' => 'example@mail.ru']) }}
   </div>
   <div class="form-group">
-  {{Form::label('message', 'Текст объявления')}}
-  {{Form::textarea('message', '', ['class' => 'form-control input', 'rows' => 3, 'required', 'minlength' => 30, 'title' => "Соообщение должно содержать как минимум 45 символов"])}}
+  {{ Form::label('adminFormMessage', 'Текст объявления') }}
+  {{ Form::textarea('adminFormMessage', '', ['class' => 'form-control input', 'rows' => 3, 'required', 'minlength' => 30, 'title' => "Соообщение должно содержать как минимум 30 символов"]) }}
   </div>
   <div class="modal-footer">
-  {{Form::submit('Отправить', ['class' => 'btn btn-primary'])}}
+  {{ Form::submit('Отправить', ['class' => 'btn btn-primary']) }}
   </div>
-  {!! Form::close() !!}
+  {{ Form::close() }}
   </div>
   
   <div class="col-12 col-md-3 pt-3 lgfont">	
@@ -37,7 +37,7 @@
   <nav>
   <ul>
   <li><a href="/ads/create">Подать объявление</a></li>
-  <li><a href="/feed">Оставить отзыв</a></li>
+  <li><a href="/feeds">Оставить отзыв</a></li>
   <li><a href="/job">Вакансии</a></li>
   <li><a href="/faq">Часто задаваемые вопросы</a></li>
   <li><a href="/contacts">Контакты</a></li>
@@ -58,7 +58,7 @@
   <div class="row justify-content-between py-2">
       <div class="col-md-auto">
         <p><a href="/rules">Пользовательское соглашение</a></p>
-        <p class="blockquote-footer">© Грузовое такси Краснодар, 2016-{{\Carbon\Carbon::now()->get('year')}}</p>
+        <p class="blockquote-footer">© Грузовое такси Краснодар, 2016-{{\Carbon\Carbon::now()->get('year') }}</p>
       </div>
       <div class="col-md-auto">
 
@@ -70,7 +70,7 @@
 </footer>
 
 <!-- ya metrica -->
-    <!-- <script type='text/javascript'>
+    <script type='text/javascript'>
         (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
         m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
         (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
@@ -81,7 +81,7 @@
              webvisor:true
         });
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/50621374" style="position:absolute; left:-9999px;" alt="" /></div></noscript> -->
+    <noscript><div><img src="https://mc.yandex.ru/watch/50621374" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- ya metrica -->
-<!-- <script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
-<script type='text/javascript' src='//stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script> -->
+<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<script type='text/javascript' src='//stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>

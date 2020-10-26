@@ -1,6 +1,6 @@
 <div class="row py-3">
     <div class="col-auto">
-        <h2 id="feed">Отзывы</h2>
+        <h2 id="feeds">Отзывы</h2>
     </div>
     <div class="col pl-0 d-none d-lg-block">
         <hr class="hrhead">
@@ -25,5 +25,5 @@
 </div>
 
 <div class="d-flex justify-content-center py-4">
-    <a class="btn btn-primary" href="/feed" role="button">Все отзывы</a>
+    <a class="btn btn-primary" href="/feeds" role="button">Все отзывы</a>
 </div>

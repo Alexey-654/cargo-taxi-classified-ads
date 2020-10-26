@@ -1,12 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdsController;
-use App\Http\Controllers\AdFeedbackFormsController;
+use App\Http\Controllers\AdController;
+use App\Http\Controllers\AdFeedbackController;
 use App\Http\Controllers\AdminFormsController;
 use App\Models\Ad;
 use App\Models\Feedback;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,16 +24,11 @@ Route::get('/', function () {
     return view('main', compact('ads', 'feedbacks'));
 })->name('main');
 
-Route::get('/ads', [AdsController::class, 'index'])->name('ads.index');
-Route::get('/ads/create', [AdsController::class, 'create'])->name('ad.create');
-Route::post('/ads/create', [AdsController::class, 'store'])->name('ad.store');
-Route::get('/ads/{id}/edit', [AdsController::class, 'edit'])->name('ad.edit');
-Route::get('/ads/{id}', [AdsController::class, 'show'])->name('ad.show');
-Route::patch('/ads/{id}', [AdsController::class, 'update'])->name('ad.update');
-Route::delete('/ads/{id}', [AdsController::class, 'destroy'])->name('ad.destroy');
+Route::resource('ads', AdController::class);
+Route::patch('ads/update-time/{ad}', [AdController::class, 'updateTime'])->name('ads.updateTime');
 
-Route::get('/feed', [AdFeedbackFormsController::class, 'index'])->name('feed.index');
-Route::post('/feed/create', [AdFeedbackFormsController::class, 'store'])->name('feed.store');
+Route::get('/feeds', [AdFeedbackController::class, 'index'])->name('feeds.index');
+Route::post('/feeds/create', [AdFeedbackController::class, 'store'])->name('feeds.store');
 
 
 Route::get('/perevozka-mebeli', function () {
@@ -78,8 +72,8 @@ Route::view('/faq', 'staticPage.faq');
 Route::view('/equip', 'staticPage.equip');
 Route::view('/gazel', 'staticPage.gazel');
 
-// legacy redirect
-Route::redirect('/feed2', '/feed', 301);
+Route::redirect('/feed', 'feeds', 301);
+Route::redirect('/feed2', 'feeds', 301);
 
 Route::fallback(function () {
     return view('staticPage.404');

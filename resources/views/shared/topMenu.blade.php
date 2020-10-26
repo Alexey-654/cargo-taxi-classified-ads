@@ -6,7 +6,7 @@
             <a class="navbar-brand p-0" href="/"><img src="/img/icon-truck.png"></a>
             <div class="collapse navbar-collapse" id="navbarToggler">
                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                  <li class="nav-item"><a class="nav-link" href="/feed">ОТЗЫВЫ</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/feeds">ОТЗЫВЫ</a></li>
                   <li class="nav-item"><a class="nav-link" href="/ads/create">ПОДАТЬ ОБЪЯВЛЕНИЕ</a></li>
               </ul>
             </div>

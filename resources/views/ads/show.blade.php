@@ -14,6 +14,12 @@
   @include('shared.adShow')
   </li>
   </ul>
+
+  <div class="clearfix">
+    <a href="/ads/{{$ad->id}}/edit" class="btn btn-secondary btn-sm my-2 float-right text-uppercase">
+      <i class="fa fa-pencil-square-o fa-lg mr-2" aria-hidden="true"></i>редактировать
+    </a>
+  </div>
 @endsection
 
 
@@ -29,5 +35,4 @@
 
 @include('feedback.form')
 
-<a href="/ads/{{$ad->id}}/edit" class="btn btn-primary mb-2">Поднять/редактировать объявление</a>
 @endsection

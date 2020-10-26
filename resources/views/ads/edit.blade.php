@@ -13,35 +13,35 @@
 <h2 class="h4 pt-4">Подвердить актуальность и поднять в выдаче</h2>
 <p>Для поднятия в выдаче вашего объявления введите email адрес указанный при подаче объявления в форму ниже</p>
 
-{{ Form::model($ad, ['url' => route('ad.update', $ad), 'method' => 'PATCH', 'class' => 'form-inline py-3']) }}
+{{ Form::model($ad, ['url' => route('ads.updateTime', $ad), 'method' => 'PATCH', 'class' => 'form-inline py-3']) }}
     <div class="form-group mb-2">
-    {{Form::email('email', '', ['class' => 'form-control input', 'required', 'placeholder' => 'example@mail.ru'])}}
+      {{ Form::email('updateTimeEmail', '', ['class' => 'form-control input', 'required', 'placeholder' => 'example@mail.ru']) }}
     </div>
     <div class="form-group mx-sm-3 mb-2">
-    {{Form::submit('Поднять', ['class' => 'btn btn-success'])}}
+      {{ Form::submit('Поднять', ['class' => 'btn btn-success']) }}
     </div>
 {{ Form::close() }}
 
 <h2 class="h4 pt-4">Изменить данные</h2>
 <p>Для редактирования вашего объявления в форме ниже заполните email, измените поля где это необходимо и нажмите кнопку отправить</p>
 
-{!! Form::model($ad, ['route' => ['ad.update', $ad->id], 'method' => 'patch', 'files' => true]) !!}
-@include('ads.form')
-<div class="modal-footer">
-  {{Form::submit('Обновить', ['class' => 'btn btn-primary'])}}
-</div>
-{!! Form::close() !!}
+{{ Form::model($ad, ['route' => ['ads.update', $ad->id], 'method' => 'patch', 'files' => true]) }}
+    @include('ads.form')
+    <div class="modal-footer">
+      {{ Form::submit('Обновить', ['class' => 'btn btn-primary']) }}
+    </div>
+{{ Form::close() }}
 
 
 <h2 class="h4 pt-4">Удалить</h2>
 <p>Для удаления вашего объявления с сайта введите ваш email адрес указанный при подаче объявления.</p>
 
-{{ Form::model($ad, ['url' => route('ad.destroy', $ad), 'method' => 'DELETE', 'class' => 'form-inline']) }}
+{{ Form::model($ad, ['url' => route('ads.destroy', $ad), 'method' => 'DELETE', 'class' => 'form-inline']) }}
     <div class="form-group mb-2">
-    {{Form::email('email', '', ['class' => 'form-control input', 'required', 'placeholder' => 'example@mail.ru'])}}
+      {{ Form::email('destroyEmail', '', ['class' => 'form-control input', 'required', 'placeholder' => 'example@mail.ru']) }}
     </div>
     <div class="form-group mx-sm-3 mb-2">
-    {{Form::submit('Удалить объявление', ['class' => 'btn btn-danger'])}}
+      {{ Form::submit('Удалить объявление', ['class' => 'btn btn-danger']) }}
     </div>
 {{ Form::close() }}
 

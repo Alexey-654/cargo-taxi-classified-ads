@@ -13,7 +13,7 @@
 <div class="col-12 col-md-6 pt-2">
 
 <h4>Заполните форму чтобы оставить отзыв</h4>
-  {!! Form::open(['url' => '/feed/create']) !!}
+  {!! Form::open(['url' => '/feeds/create']) !!}
   <div class="form-group">
   {{Form::label('email', 'Ваш email')}}
   {{Form::email('email', '', ['class' => 'form-control input', 'required', 'placeholder' => 'example@mail.ru'])}}

@@ -15,7 +15,7 @@
 <div class="row">
   <div class="col-12 col-md-7">
 
-{!! Form::model($ad, ['url' => 'ads/create', 'files' => true]) !!}
+{!! Form::model($ad, ['route' => 'ads.store', 'files' => true]) !!}
 @include('ads.form')
 <div class="modal-footer">
   {{Form::submit('Отправить', ['class' => 'btn btn-primary'])}}
@@ -41,7 +41,7 @@
   <li>Вы получаете отметку - <i class="fa fa-thumbs-up fa-lg text-warning"></i>, которая привлекает дополнительное внимание пользователей.</li>
   <li>Публикация на срок 90 дней.</li>
   <li>Стоимость  - 1 800 &#8381;</li>
-  <li>Для размещения напишите, пож-та, через форму обратно связи.</li>
+  <li>Для размещения напишите, пожалуйста, через форму обратной связи.</li>
 </ul>
 </div>
 <p class="pt-2">Ваши вопросы и предложения отправляйте через форму связаться с администратором сайта ниже.</p>
