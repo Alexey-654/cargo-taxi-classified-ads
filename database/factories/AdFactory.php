@@ -27,7 +27,7 @@ class AdFactory extends Factory
             'email' => $this->faker->unique()->safeEmail,
             'phone' => $this->faker->bothify('+79#########'),
             'type' => $this->faker->randomElement(['Premium', 'Standart']),
-            'cargo_capacity' => $this->faker->numberBetween(1, 20),
+            'cargo_capacity' => $this->faker->randomFloat(1, 1, 20),
             'body_length' => $this->faker->randomFloat(1, 3, 14),
             'body_width' => $this->faker->randomFloat(1, 1, 3),
             'body_height' => $this->faker->randomFloat(1, 1, 3),

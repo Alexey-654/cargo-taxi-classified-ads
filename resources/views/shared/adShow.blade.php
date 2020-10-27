@@ -18,7 +18,13 @@
           @endif
         </h4>
         <p>{{ $ad->description }}</p>
-        <a class="btn btn-outline-success" rel="nofollow" href="tel:{{ $ad->phone }}" title="Позвонить водителю - {{ $ad->firstname }}">
+        <a class="btn 
+          @if ($ad->type === 'Premium')
+          btn-outline-success
+          @else 
+          btn-outline-secondary
+          @endif "
+          rel="nofollow" href="tel:{{ $ad->phone }}" title="Позвонить водителю - {{ $ad->firstname }}">
           <span class="h3"><i class="fa fa-mobile"></i></span> 
           <span class="h4">
             {{ sprintf(

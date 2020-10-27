@@ -14,6 +14,7 @@ class ChangeColomnsTypeAdsTable extends Migration
     public function up()
     {
         Schema::table('ads', function (Blueprint $table) {
+            $table->decimal('cargo_capacity', 3, 1)->change();
             $table->decimal('body_length', 3, 1)->change();
             $table->decimal('body_width', 2, 1)->change();
             $table->decimal('body_height', 2, 1)->change();
