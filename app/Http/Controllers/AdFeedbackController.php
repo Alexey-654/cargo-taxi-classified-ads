@@ -42,6 +42,17 @@ class AdFeedbackController extends Controller
         $feedback->fill($data);
         $feedback->save();
 
+        $message = $data['email'] . "\n" .
+            'Name - ' . $data['name'] . "\n" .
+            'Ad_id - ' . $data['ad_id'] . "\n" .
+            'Score - ' . $data['score'] . "\n" .
+            'Message - ' . $data['message'];
+
+        Mail::raw($message, function ($message) {
+            $message->to('vianosenko@gmail.com')
+                ->subject('Ad Feedback Form');
+        });
+
         return back()->with('message', 'Ваш отзыв отправлен');
     }
 }

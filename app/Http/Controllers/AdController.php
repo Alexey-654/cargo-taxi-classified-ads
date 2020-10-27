@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\Http\Requests\StoreAd;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Mail;
 
 // use App\Http\Requests\UpdateAd;
 
@@ -56,6 +57,13 @@ class AdController extends Controller
         $ad = new Ad();
         $ad->fill($validatedData);
         $ad->save();
+
+        $message = "You have new ad go check it - " . route('ads.show', $ad);
+
+        Mail::raw($message, function ($message) {
+            $message->to('vianosenko@gmail.com')
+                ->subject('New Ad');
+        });
 
         return redirect()->route('ads.show', $ad)
             ->with('message', 'Ваше объявление успешно созданно.');

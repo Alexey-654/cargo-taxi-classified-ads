@@ -27,8 +27,7 @@ class AdminFormsController extends Controller
             ]
         ]);
 
-        $message = request('adminFormEmail') . "\n" . request('adminFormMessage');
-
+        $message = 'email - ' . request('adminFormEmail') . "\n" . 'message - ' . request('adminFormMessage');
         Mail::raw($message, function ($message) {
             $message->to('vianosenko@gmail.com')
                 ->subject('Admin Feedback Form');
