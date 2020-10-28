@@ -29,15 +29,15 @@ class AdFeedbackController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
         $data = $request->validate([
-            'email' => 'bail|required|email|string|max:100|unique:feedbacks',
-            'name' => 'required|string|max:100',
-            'ad_id' => 'bail|required|numeric',
+            'email' => 'bail|required|email|unique:feedbacks',
+            'name' => 'required|string|between:2,100',
+            'ad_id' => 'bail|required|numeric|exists:ads,id',
             'score' => 'bail|required|in:1,2,3,4,5',
-            'message' => 'bail|required|string|min:45|max:600|not_regex:{http}|unique:feedbacks'
+            'message' => 'bail|required|string|between:30,1000|not_regex:{http}|unique:feedbacks'
         ]);
-
+        
         $feedback = new Feedback();
         $feedback->fill($data);
         $feedback->save();

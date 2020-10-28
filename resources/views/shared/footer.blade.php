@@ -4,19 +4,40 @@
 
   <div class="col-12 col-md-4 pt-3">
   <p class="lgfont">Связаться с администратором сайта:</p>
-  {{ Form::open(['url' => 'to-admin']) }}
+
+  <form method="POST" action="/to-admin" accept-charset="UTF-8">
+    @csrf
+
   <div class="form-group">
-  {{ Form::label('adminFormEmail', 'Ваш email') }}
-  {{ Form::email('adminFormEmail', '', ['class' => 'form-control input', 'required', 'placeholder' => 'example@mail.ru']) }}
+    <label for="adminFormEmail">Ваш email</label>
+    <input 
+      class="form-control input @error('adminFormEmail') is-invalid @enderror"
+      required
+      placeholder="example@mail.ru"
+      name="adminFormEmail"
+      type="email"
+      value="{{ old('adminFormEmail') }}"
+      id="adminFormEmail"
+    >
   </div>
+
   <div class="form-group">
-  {{ Form::label('adminFormMessage', 'Текст объявления') }}
-  {{ Form::textarea('adminFormMessage', '', ['class' => 'form-control input', 'rows' => 3, 'required', 'minlength' => 30, 'title' => "Соообщение должно содержать как минимум 30 символов"]) }}
+    <label for="adminFormMessage">Текст сообщения</label>
+    <textarea
+      class="form-control input @error('adminFormMessage') is-invalid @enderror"
+      rows="3"
+      required
+      minlength="30"
+      title="Соообщение должно содержать как минимум 30 символов"
+      name="adminFormMessage"
+      cols="50"
+      id="adminFormMessage"
+    >{{ old('adminFormMessage') }}</textarea>
   </div>
   <div class="modal-footer">
-  {{ Form::submit('Отправить', ['class' => 'btn btn-primary']) }}
+    <input class="btn btn-primary" type="submit" value="Отправить">
   </div>
-  {{ Form::close() }}
+  </form>
   </div>
   
   <div class="col-12 col-md-3 pt-3 lgfont">	

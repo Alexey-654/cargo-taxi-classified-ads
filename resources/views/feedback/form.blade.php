@@ -13,36 +13,78 @@
 <div class="col-12 col-md-6 pt-2">
 
 <h4>Заполните форму чтобы оставить отзыв</h4>
-  {!! Form::open(['url' => '/feeds/create']) !!}
+
+<form method="POST" action="{{route('feeds.store')}}" accept-charset="UTF-8">
+  @csrf
+
   <div class="form-group">
-  {{Form::label('email', 'Ваш email')}}
-  {{Form::email('email', '', ['class' => 'form-control input', 'required', 'placeholder' => 'example@mail.ru'])}}
+  <label for="email">Ваш email</label>
+  <input 
+    class="form-control input @error('email') is-invalid @enderror"
+    required 
+    placeholder="example@mail.ru" 
+    name="email" 
+    type="email" 
+    value="{{ old('email') }}" 
+    id="email"
+  >
   </div>
+
   <div class="form-group">
-  {{Form::label('name', 'Ваше имя или название вашей компании')}}
-  {{Form::text('name', '', ['class' => 'form-control input', 'required'])}}
+  <label for="name">Ваше имя или название вашей компании</label>
+  <input 
+    class="form-control input @error('name') is-invalid @enderror" 
+    required
+    name="name"
+    type="text"
+    value="{{ old('name') }}" 
+    id="name"
+  >
   </div>
+
   <div class="form-group">
-  {{Form::label('score', 'Поставьте оценку')}}
+  <label for="score">Поставьте оценку</label>
   <br>
-  <span>{{Form::radio('score', '1')}} 1</span>
-  <span class="pl-3">{{Form::radio('score', '2')}} 2</span>
-  <span class="pl-3">{{Form::radio('score', '3')}} 3</span>
-  <span class="pl-3">{{Form::radio('score', '4')}} 4</span>
-  <span class="pl-3">{{Form::radio('score', '5', ['checked' => 'checked'])}} 5</span>
+  <span><input name="score" type="radio" value="1" id="score"> 1</span>
+  <span class="pl-3"><input name="score" type="radio" value="2" id="score"> 2</span>
+  <span class="pl-3"><input name="score" type="radio" value="3" id="score"> 3</span>
+  <span class="pl-3"><input name="score" type="radio" value="4" id="score"> 4</span>
+  <span class="pl-3"><input checked="checked" name="score" type="radio" value="5" id="score"> 5</span>
   </div>
+
   <div class="form-group">
-  {{Form::label('ad_id', 'Укажите id водителя. Указанно на фотографии в объявлении')}}
-  {{Form::number('ad_id', "", ['class' => 'form-control input', 'required', 'min' => 1, 'max' => 1000])}}
+  <label for="ad_id">Укажите id водителя. Указанно на фотографии в объявлении</label>
+  <input 
+    class="form-control input input @error('ad_id') is-invalid @enderror"
+    id="ad_id"
+    required
+    min="1"
+    max="1000"
+    name="ad_id"
+    type="number"
+    value="{{ old('ad_id') }}"
+  >
   </div>
+
   <div class="form-group">
-  {{Form::label('message', 'Текст отзыва')}}
-  {{Form::textarea('message', '', ['class' => 'form-control input', 'rows' => 5, 'required', 'minlength' => 45, 'title' => "Соообщение должно содержать как минимум 45 символов"])}}
+  <label for="message">Текст отзыва</label>
+  <textarea 
+    class="form-control input @error('message') is-invalid @enderror"
+    id="message"
+    required
+    minlength="40"
+    title="Соообщение должно содержать как минимум 40 символов"
+    name="message"
+    rows="5"
+    cols="50"
+  >{{ old('message') }}</textarea>
+
   </div>
   <div class="modal-footer">
-  {{Form::submit('Отправить', ['class' => 'btn btn-primary'])}}
+  <input class="btn btn-primary" type="submit" value="Отправить">
   </div>
-  {!! Form::close() !!}
+  </form>
+ 
 </div>
 </div>
 <hr />

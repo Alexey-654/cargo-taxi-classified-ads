@@ -58,7 +58,7 @@ class AdController extends Controller
         $ad->fill($validatedData);
         $ad->save();
 
-        $message = "You have new ad go check it - " . route('ads.show', $ad);
+        $message = "You have new ad, go check it - " . route('ads.show', $ad);
 
         Mail::raw($message, function ($message) {
             $message->to('vianosenko@gmail.com')
@@ -103,27 +103,26 @@ class AdController extends Controller
     {
         if ($request->input('email') === $ad->email) {
             $data = $this->validate($request, [
-                'firstname' => 'bail|required|string|max:30',
-                'lastname' => 'string|max:30',
+                'firstname' => 'bail|required|string|between:2,33',
+                'lastname' => 'string|between:2,33',
                 'email' => [
                     'bail',
                     'required',
                     'email',
-                    'string',
-                    'max:100',
                     Rule::unique('ads')->ignore($ad->id)
                 ],
                 'phone' => [
                     'bail',
                     'required',
+                    'string',
                     'size:12',
                     Rule::unique('ads')->ignore($ad->id)
                 ],
                 'type' => 'bail|required|string',
-                'cargo_capacity' => 'required',
-                'body_length' => 'required',
-                'body_width' => 'required',
-                'body_height' => 'required',
+                'cargo_capacity' => 'required|numeric',
+                'body_length' => 'required|numeric',
+                'body_width' => 'required|numeric',
+                'body_height' => 'required|numeric',
                 'back_door' => 'in:0,1',
                 'side_door' => 'in:0,1',
                 'up_door' => 'in:0,1',
@@ -133,18 +132,18 @@ class AdController extends Controller
                     'bail',
                     'required',
                     'string',
-                    'max:100',
+                    'between:20,120',
                     Rule::unique('ads')->ignore($ad->id)
                 ],
                 'description' => [
                     'bail',
                     'required',
                     'string',
-                    'max:600',
+                    'between:20,600',
                     Rule::unique('ads')->ignore($ad->id)
                 ],
-                'city_price' => 'required',
-                'out_of_town_price' => 'required',
+                'city_price' => 'required|numeric',
+                'out_of_town_price' => 'required|numeric',
                 'photo' => 'image|between:10,1000'
             ]);
 

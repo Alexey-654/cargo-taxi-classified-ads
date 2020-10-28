@@ -24,9 +24,9 @@ class StoreAd extends FormRequest
     public function rules()
     {
         return [
-            'firstname' => 'required|string|max:30',
-            'lastname' => 'required|string|max:30',
-            'email' => 'bail|required|email|string|max:100|unique:ads',
+            'firstname' => 'required|string|between:2,33',
+            'lastname' => 'required|string|between:2,33',
+            'email' => 'bail|required|email|string|unique:ads',
             'phone' => 'bail|required|size:12|unique:ads',
             'type' => 'bail|required|string',
             'cargo_capacity' => 'required',
@@ -38,8 +38,8 @@ class StoreAd extends FormRequest
             'up_door' => 'in:0,1',
             'open_door' => 'in:0,1',
             'movers' => 'bail|required|in:0,1',
-            'title' => 'bail|required|unique:ads|string|max:100',
-            'description' => 'bail|required|string|unique:ads|max:600',
+            'title' => 'bail|required|unique:ads|string|not_regex:{http}|between:20,120',
+            'description' => 'bail|required|string|not_regex:{http}|unique:ads|between:20,600',
             'city_price' => 'required',
             'out_of_town_price' => 'required',
             'photo' => 'required|image|between:10,1000'

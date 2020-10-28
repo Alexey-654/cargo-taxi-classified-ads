@@ -16,14 +16,14 @@ class AdminFormsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'adminFormEmail' => 'bail|required|email|string|max:255',
+            'adminFormEmail' => 'bail|required|email',
             'adminFormMessage' => [
                 'bail',
                 'required',
                 'string',
-                'min:30',
-                'max:500',
+                'between:30,1000',
                 'not_regex:{http}',
+                'not_regex:{#}'
             ]
         ]);
 
