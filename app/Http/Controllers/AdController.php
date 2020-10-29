@@ -101,82 +101,34 @@ class AdController extends Controller
      */
     public function update(Request $request, Ad $ad)
     {
-        if ($request->input('email') === $ad->email) {
-            $data = $this->validate($request, [
-                'firstname' => 'bail|required|string|between:2,33',
-                'lastname' => 'string|between:2,33',
-                'email' => [
-                    'bail',
-                    'required',
-                    'email',
-                    Rule::unique('ads')->ignore($ad->id)
-                ],
-                'phone' => [
-                    'bail',
-                    'required',
-                    'string',
-                    'size:12',
-                    Rule::unique('ads')->ignore($ad->id)
-                ],
-                'type' => 'bail|required|string',
-                'cargo_capacity' => 'required|numeric',
-                'body_length' => 'required|numeric',
-                'body_width' => 'required|numeric',
-                'body_height' => 'required|numeric',
-                'back_door' => 'in:0,1',
-                'side_door' => 'in:0,1',
-                'up_door' => 'in:0,1',
-                'open_door' => 'in:0,1',
-                'movers' => 'bail|required|in:0,1',
-                'title' => [
-                    'bail',
-                    'required',
-                    'string',
-                    'between:20,120',
-                    Rule::unique('ads')->ignore($ad->id)
-                ],
-                'description' => [
-                    'bail',
-                    'required',
-                    'string',
-                    'between:20,600',
-                    Rule::unique('ads')->ignore($ad->id)
-                ],
-                'city_price' => 'required|numeric',
-                'out_of_town_price' => 'required|numeric',
-                'photo' => 'image|between:10,1000'
-            ]);
-
-            if ($request->file('photo')) {
-                $image = $request->file('photo');
-                $extension = $image->clientExtension();
-                $filename = "id" . $ad->id . "." . $extension;
-                $data['photo'] = $image->storeAs('adsPhoto', $filename);
-                $imageResize = Image::make($image->getRealPath());
-                $imageResize->fit(250, 195);
-                $imageResize->save(storage_path('app/public/thumbnails/adsPhoto/') . $filename);
-            }
-
-            $ad->fill($data);
-            $ad->save();
-
-            return redirect()->route('ads.index')
-                ->with('message', 'Ваше объявление успешно обновленно и поднято');
+        $data = self::adUpdateValidation($request, $ad);
+        if ($request->file('photo')) {
+            $image = $request->file('photo');
+            $extension = $image->clientExtension();
+            $filename = "id" . $ad->id . "." . $extension;
+            $data['photo'] = $image->storeAs('adsPhoto', $filename);
+            $imageResize = Image::make($image->getRealPath());
+            $imageResize->fit(250, 195);
+            $imageResize->save(storage_path('app/public/thumbnails/adsPhoto/') . $filename);
         }
-
-        return back()->with('error', 'Некорректный email адрес');
+        $ad->fill($data);
+        $ad->save();
+        return redirect()->route('ads.index')
+            ->with('message', 'Ваше объявление успешно обновленно и поднято');
     }
 
     public function updateTime(Request $request, Ad $ad)
     {
-        if ($request->input('updateTimeEmail') === $ad->email) {
-            $ad->touch();
-            $ad->save();
-            return redirect()->route('ads.index')
-                ->with('message', 'Ваше объявление успешно поднято');
-        }
+        $this->validate(
+            $request,
+            ['updateTimeEmail' => Rule::in($ad->email)],
+            ['Поле email должно совпадать с email введенным при регистрации.']
+        );
+        $ad->touch();
+        $ad->save();
 
-        return back()->with('error', 'Некорректный email адрес');
+        return redirect()->route('ads.index')
+            ->with('message', 'Ваше объявление успешно поднято');
     }
 
     /**
@@ -187,13 +139,59 @@ class AdController extends Controller
      */
     public function destroy(Request $request, Ad $ad)
     {
-        if ($request->input('destroyEmail') === $ad->email) {
-            $ad->state = 'deleted';
-            $ad->save();
-            return redirect()->route('ads.index')
-                ->with('message', 'Ваше объявление удалено');
-        }
+        $this->validate(
+            $request,
+            ['destroyEmail' => Rule::in($ad->email)],
+            ['Поле email должно совпадать с email введенным при регистрации.']
+        );
+        $ad->state = 'deleted';
+        $ad->save();
 
-        return back()->with('error', 'Некорректный email адрес');
+        return redirect()->route('ads.index')
+            ->with('message', 'Ваше объявление удалено');
+    }
+
+    protected static function adUpdateValidation($request, $ad)
+    {
+        return $request->validate([
+            'firstname' => 'required|string|between:2,33',
+            'lastname' => 'string|between:2,33',
+            'email' => [
+                'required',
+                'email',
+                Rule::in($ad->email)
+            ],
+            'phone' => [
+                'required',
+                'string',
+                'size:12',
+                Rule::unique('ads')->ignore($ad->id)
+            ],
+            'type' => 'required|string',
+            'cargo_capacity' => 'required|numeric',
+            'body_length' => 'required|numeric',
+            'body_width' => 'required|numeric',
+            'body_height' => 'required|numeric',
+            'back_door' => 'in:0,1',
+            'side_door' => 'in:0,1',
+            'up_door' => 'in:0,1',
+            'open_door' => 'in:0,1',
+            'movers' => 'required|in:0,1',
+            'title' => [
+                'required',
+                'string',
+                'between:20,120',
+                Rule::unique('ads')->ignore($ad->id)
+            ],
+            'description' => [
+                'required',
+                'string',
+                'between:20,600',
+                Rule::unique('ads')->ignore($ad->id)
+            ],
+            'city_price' => 'required|numeric',
+            'out_of_town_price' => 'required|numeric',
+            'photo' => 'image|between:10,1000'
+        ]);
     }
 }

@@ -18,15 +18,11 @@ use App\Models\Feedback;
 |
 */
 
-$ads = Ad::getAds();
-$feedbacks = Feedback::getFeedBacks();
-
-Route::get('test', function () {
-
+Route::get('/', function () {
+    $ads = Ad::getAds();
+    $feedbacks = Feedback::getFeedBacks();
+    return view('main', compact('ads', 'feedbacks'));
 });
-
-Route::view('/', 'main', compact('ads', 'feedbacks'))
-    ->name('main');
 
 Route::resource('ads', AdController::class);
 Route::patch('ads/update-time/{ad}', [AdController::class, 'updateTime'])
@@ -38,11 +34,36 @@ Route::get('/feeds', [AdFeedbackController::class, 'index'])
 Route::post('/feeds/create', [AdFeedbackController::class, 'store'])
     ->name('feeds.store');
 
-Route::view('/perevozka-mebeli', 'perevozka-mebeli', compact('ads', 'feedbacks'));
-Route::view('/personal', 'personal', compact('ads', 'feedbacks'));
-Route::view('/pereezdy', 'pereezdy', compact('ads', 'feedbacks'));
-Route::view('/carrying', 'carrying', compact('ads', 'feedbacks'));
-Route::view('/gruzchiki', 'gruzchiki', compact('ads', 'feedbacks'));
+
+Route::get('/perevozka-mebeli', function () {
+    $ads = Ad::getAds();
+    $feedbacks = Feedback::getFeedBacks();
+    return view('/perevozka-mebeli', compact('ads', 'feedbacks'));
+});
+
+Route::get('/personal', function () {
+    $ads = Ad::getAds();
+    $feedbacks = Feedback::getFeedBacks();
+    return view('/personal', compact('ads', 'feedbacks'));
+});
+
+Route::get('/pereezdy', function () {
+    $ads = Ad::getAds();
+    $feedbacks = Feedback::getFeedBacks();
+    return view('/pereezdy', compact('ads', 'feedbacks'));
+});
+
+Route::get('/carrying', function () {
+    $ads = Ad::getAds();
+    $feedbacks = Feedback::getFeedBacks();
+    return view('/carrying', compact('ads', 'feedbacks'));
+});
+
+Route::get('/gruzchiki', function () {
+    $ads = Ad::getAds();
+    $feedbacks = Feedback::getFeedBacks();
+    return view('/gruzchiki', compact('ads', 'feedbacks'));
+});
 
 Route::post('/to-admin', [AdminFormsController::class, 'store']);
 

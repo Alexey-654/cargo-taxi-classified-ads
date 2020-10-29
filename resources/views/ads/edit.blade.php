@@ -15,7 +15,7 @@
 
 {{ Form::model($ad, ['url' => route('ads.updateTime', $ad), 'method' => 'PATCH', 'class' => 'form-inline py-3']) }}
     <div class="form-group mb-2">
-      {{ Form::email('updateTimeEmail', '', ['class' => 'form-control input', 'required', 'placeholder' => 'example@mail.ru']) }}
+      {{ Form::email('updateTimeEmail', '', ['class' => 'form-control input ' . ($errors->has('updateTimeEmail') ? 'is-invalid' : null), 'required', 'placeholder' => 'example@mail.ru']) }}
     </div>
     <div class="form-group mx-sm-3 mb-2">
       {{ Form::submit('Поднять', ['class' => 'btn btn-success']) }}
@@ -38,7 +38,7 @@
 
 {{ Form::model($ad, ['url' => route('ads.destroy', $ad), 'method' => 'DELETE', 'class' => 'form-inline']) }}
     <div class="form-group mb-2">
-      {{ Form::email('destroyEmail', '', ['class' => 'form-control input', 'required', 'placeholder' => 'example@mail.ru']) }}
+      {{ Form::email('destroyEmail', '', ['class' => 'form-control input ' . ($errors->has('destroyEmail') ? 'is-invalid' : null), 'required', 'placeholder' => 'example@mail.ru']) }}
     </div>
     <div class="form-group mx-sm-3 mb-2">
       {{ Form::submit('Удалить объявление', ['class' => 'btn btn-danger']) }}
