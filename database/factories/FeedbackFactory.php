@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\FeedBack;
+use App\Models\Feedback;
 use App\Models\Ad;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class FeedBackFactory extends Factory
+class FeedbackFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = FeedBack::class;
+    protected $model = Feedback::class;
 
     /**
      * Define the model's default state.

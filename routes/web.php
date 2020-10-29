@@ -18,11 +18,13 @@ use App\Models\Feedback;
 |
 */
 
-Route::get('/', function () {
-    $ads = Ad::getAds();
-    $feedbacks = Feedback::getFeedBacks();
-    return view('main', compact('ads', 'feedbacks'));
-});
+// composer view
+Route::view('/', 'main')->name('main');
+Route::view('/perevozka-mebeli', 'perevozka-mebeli');
+Route::view('/personal', 'personal');
+Route::view('/pereezdy', 'pereezdy');
+Route::view('/carrying', 'carrying');
+Route::view('/gruzchiki', 'gruzchiki');
 
 Route::resource('ads', AdController::class);
 Route::patch('ads/update-time/{ad}', [AdController::class, 'updateTime'])
@@ -34,40 +36,8 @@ Route::get('/feeds', [AdFeedbackController::class, 'index'])
 Route::post('/feeds/create', [AdFeedbackController::class, 'store'])
     ->name('feeds.store');
 
-
-Route::get('/perevozka-mebeli', function () {
-    $ads = Ad::getAds();
-    $feedbacks = Feedback::getFeedBacks();
-    return view('/perevozka-mebeli', compact('ads', 'feedbacks'));
-});
-
-Route::get('/personal', function () {
-    $ads = Ad::getAds();
-    $feedbacks = Feedback::getFeedBacks();
-    return view('/personal', compact('ads', 'feedbacks'));
-});
-
-Route::get('/pereezdy', function () {
-    $ads = Ad::getAds();
-    $feedbacks = Feedback::getFeedBacks();
-    return view('/pereezdy', compact('ads', 'feedbacks'));
-});
-
-Route::get('/carrying', function () {
-    $ads = Ad::getAds();
-    $feedbacks = Feedback::getFeedBacks();
-    return view('/carrying', compact('ads', 'feedbacks'));
-});
-
-Route::get('/gruzchiki', function () {
-    $ads = Ad::getAds();
-    $feedbacks = Feedback::getFeedBacks();
-    return view('/gruzchiki', compact('ads', 'feedbacks'));
-});
-
 Route::post('/to-admin', [AdminFormsController::class, 'store']);
 
-// static page
 Route::view('/rules', 'staticPage.rules');
 Route::view('/job', 'staticPage.job');
 Route::view('/cargo', 'staticPage.cargo');
