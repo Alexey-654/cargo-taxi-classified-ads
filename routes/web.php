@@ -4,8 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdController;
 use App\Http\Controllers\AdFeedbackController;
 use App\Http\Controllers\AdminFormsController;
-use App\Models\Ad;
-use App\Models\Feedback;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +17,11 @@ use App\Models\Feedback;
 */
 
 // composer view
+
+// Route::get('test', function () {
+//     return view('main');
+// });
+
 Route::view('/', 'main')->name('main');
 Route::view('/perevozka-mebeli', 'perevozka-mebeli');
 Route::view('/personal', 'personal');

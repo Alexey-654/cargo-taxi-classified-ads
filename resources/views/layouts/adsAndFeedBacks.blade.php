@@ -7,12 +7,14 @@
 
     <body>
         @include('shared.topMenu')
-        <div class="container mt-5">
-            @yield('preamble')
-            @include('shared.adsIndex')
-            @yield('content')
-            @include('shared.colomnTemplateFeedbacks')
-        </div>
+            <main>
+                <div class="container mt-5">
+                    @yield('preamble')
+                    @include('shared.adsIndex')
+                    @yield('content')
+                    @include('shared.colomnTemplateFeedbacks')
+                </div>
+            </main>
         @include('shared.footer')
     </body>
 </html>

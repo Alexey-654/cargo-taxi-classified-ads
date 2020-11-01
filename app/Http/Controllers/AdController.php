@@ -9,8 +9,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 use App\Http\Requests\StoreAd;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Mail;
-
-// use App\Http\Requests\UpdateAd;
+use App\Mail\AdminNotification;
 
 class AdController extends Controller
 {
@@ -58,12 +57,8 @@ class AdController extends Controller
         $ad->fill($validatedData);
         $ad->save();
 
-        $message = "You have new ad, go check it - " . route('ads.show', $ad);
-
-        Mail::raw($message, function ($message) {
-            $message->to('vianosenko@gmail.com')
-                ->subject('New Ad');
-        });
+        $subject = 'New Ad Form filled';
+        Mail::to('vianosenko@gmail.com')->send(new AdminNotification($validatedData, $subject));
 
         return redirect()->route('ads.show', $ad)
             ->with('message', 'Ваше объявление успешно созданно.');
@@ -101,7 +96,7 @@ class AdController extends Controller
      */
     public function update(Request $request, Ad $ad)
     {
-        $data = self::adUpdateValidation($request, $ad);
+        $data = self::updateValidation($request, $ad);
         if ($request->file('photo')) {
             $image = $request->file('photo');
             $extension = $image->clientExtension();
@@ -151,7 +146,7 @@ class AdController extends Controller
             ->with('message', 'Ваше объявление удалено');
     }
 
-    protected static function adUpdateValidation($request, $ad)
+    protected static function updateValidation($request, $ad)
     {
         return $request->validate([
             'firstname' => 'required|string|between:2,33',
@@ -181,12 +176,14 @@ class AdController extends Controller
                 'required',
                 'string',
                 'between:20,120',
+                'not_regex:/@|#|http/',
                 Rule::unique('ads')->ignore($ad->id)
             ],
             'description' => [
                 'required',
                 'string',
                 'between:20,600',
+                'not_regex:/@|#|http/',
                 Rule::unique('ads')->ignore($ad->id)
             ],
             'city_price' => 'required|numeric',

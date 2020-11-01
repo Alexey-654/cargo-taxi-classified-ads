@@ -12,7 +12,8 @@
         "intervention/image": "^2.5",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
-        "laravelcollective/html": "^6.2"
+        "laravelcollective/html": "^6.2",
+        "spatie/laravel-sitemap": "^5.8"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

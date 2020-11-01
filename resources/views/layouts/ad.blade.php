@@ -7,10 +7,12 @@
 
     <body>
         @include('shared.topMenu')
-        <div class="container mt-5">
-            @yield('preamble')
-            @yield('feedback')
-        </div>
+            <main>
+                <div class="container mt-5">
+                    @yield('preamble')
+                    @yield('feedback')
+                </div>
+            </main>
         @include('shared.footer')
     </body>
 </html>

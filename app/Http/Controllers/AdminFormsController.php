@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\AdminNotification;
 
 class AdminFormsController extends Controller
 {
@@ -22,16 +23,24 @@ class AdminFormsController extends Controller
                 'required',
                 'string',
                 'between:30,1000',
-                'not_regex:{http}',
-                'not_regex:{#}'
+                'not_regex:/@|#|http/',
             ]
         ]);
 
-        $message = 'email - ' . request('adminFormEmail') . "\n" . 'message - ' . request('adminFormMessage');
-        Mail::raw($message, function ($message) {
-            $message->to('vianosenko@gmail.com')
-                ->subject('Admin Feedback Form');
-        });
+        $userEntranceTime = session()->get('time');
+        $userTimeOnSiteBeforeSendForm = now()->diffInMinutes($userEntranceTime);
+
+        $fields = [
+            'email' => request('adminFormEmail'),
+            'message' => request('adminFormMessage'),
+            'url' => url()->previous(),
+            'time on site before send form' => $userTimeOnSiteBeforeSendForm,
+            'referer' => $request->headers->get('referer'),
+            'user-agent' => $request->userAgent(),
+        ];
+
+        $subject = 'Admin Feedback Form';
+        Mail::to('vianosenko@gmail.com')->send(new AdminNotification($fields, $subject));
 
         return back()->with('message', 'Сообщение отправленно');
     }

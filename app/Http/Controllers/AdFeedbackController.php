@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Feedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\AdminNotification;
 
 class AdFeedbackController extends Controller
 {
@@ -30,7 +31,7 @@ class AdFeedbackController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $feedbackFields = $request->validate([
             'email' => 'bail|required|email|unique:feedbacks',
             'name' => 'required|string|between:2,100',
             'ad_id' => 'bail|required|numeric|exists:ads,id',
@@ -39,19 +40,11 @@ class AdFeedbackController extends Controller
         ]);
 
         $feedback = new Feedback();
-        $feedback->fill($data);
+        $feedback->fill($feedbackFields);
         $feedback->save();
 
-        $message = $data['email'] . "\n" .
-            'Name - ' . $data['name'] . "\n" .
-            'Ad_id - ' . $data['ad_id'] . "\n" .
-            'Score - ' . $data['score'] . "\n" .
-            'Message - ' . $data['message'];
-
-        Mail::raw($message, function ($message) {
-            $message->to('vianosenko@gmail.com')
-                ->subject('Ad Feedback Form');
-        });
+        $subject = 'Ad Feedback Form';
+        Mail::to('vianosenko@gmail.com')->send(new AdminNotification($feedbackFields, $subject));
 
         return back()->with('message', 'Ваш отзыв отправлен');
     }

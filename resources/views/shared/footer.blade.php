@@ -1,3 +1,4 @@
+</main>
 <footer class="bg-dark text-light">
   <div class="container">
   <div class="row pt-5 pb-4 mt-5 justify-content-around">
@@ -10,7 +11,7 @@
 
   <div class="form-group">
     <label for="adminFormEmail">Ваш email</label>
-    <input 
+    <input
       class="form-control input @error('adminFormEmail') is-invalid @enderror"
       required
       placeholder="example@mail.ru"
@@ -39,8 +40,8 @@
   </div>
   </form>
   </div>
-  
-  <div class="col-12 col-md-3 pt-3 lgfont">	
+
+  <div class="col-12 col-md-3 pt-3 lgfont">
   <p>Услуги перевозок</p>
   <nav>
     <ul>
@@ -68,12 +69,12 @@
   </div>
   <div class="row">
   <div class="col">
-  
+
   </div>
-  </div>	
-  </div>	
-  <div class="container-fluid">	
-  <hr class="border-primary">	
+  </div>
+  </div>
+  <div class="container-fluid">
+  <hr class="border-primary">
   </div>
   <div class="container">
   <div class="row justify-content-between py-2">
@@ -86,23 +87,9 @@
         <p><a class="text-light" rel="nofollow" target="_blank" href="https://github.com/Alexey-654"><i class="fa fa-github fa-2x" aria-hidden="true"></i>
 </a></p>
       </div>
-    </div>	
-  </div>			
+    </div>
+  </div>
 </footer>
 
-<!-- ya metrica -->
-    <script type='text/javascript'>
-        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-        ym(50621374, "init", {
-             clickmap:true,
-             trackLinks:true,
-             accurateTrackBounce:true,
-             webvisor:true
-        });
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/50621374" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- ya metrica -->
 <script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
 <script type='text/javascript' src='//stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
