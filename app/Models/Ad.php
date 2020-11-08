@@ -40,4 +40,11 @@ class Ad extends Model
     {
         return Ad::where('state', 'published')->orderBy('type')->latest('updated_at')->paginate(10);
     }
+
+    public static function updateTimeInRandomAds($qnt = 1)
+    {
+        Ad::inRandomOrder()
+            ->take($qnt)
+            ->update(['updated_at' => now()]);
+    }
 }

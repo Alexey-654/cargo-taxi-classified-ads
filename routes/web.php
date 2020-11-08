@@ -54,5 +54,5 @@ Route::redirect('/feed', 'feeds', 301);
 Route::redirect('/feed2', 'feeds', 301);
 
 Route::fallback(function () {
-    return view('staticPage.404');
+    return response(view('staticPage.404'), 404);
 });
