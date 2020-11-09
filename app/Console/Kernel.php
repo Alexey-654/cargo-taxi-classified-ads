@@ -28,6 +28,7 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             Ad::updateTimeInRandomAds();
         })->dailyAt('9:00');
+        $schedule->command('sitemap:generate')->weeklyOn(2, '9:30');
     }
 
     /**
